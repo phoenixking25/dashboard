@@ -31,7 +31,6 @@ export class UploadFileComponent {
     }
   }
 
-  // TODO handle error somehow
   readFile(file: File): void {
     this.filename = file.name;
 
@@ -43,7 +42,10 @@ export class UploadFileComponent {
         content,
       } as KdFile);
     };
-
-    reader.readAsText(file);
+    if (file instanceof ArrayBuffer) {
+      // throw an error, 'cause you can't handle this
+    } else {
+      reader.readAsText(file);
+    }
   }
 }

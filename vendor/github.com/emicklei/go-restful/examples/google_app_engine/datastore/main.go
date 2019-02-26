@@ -8,6 +8,7 @@ import (
 	"google.golang.com/appengine/user"
 	"net/http"
 	"time"
+	"path"
 )
 
 // This example demonstrates a reasonably complete suite of RESTful operations backed
@@ -125,8 +126,7 @@ func (u *ProfileApi) insert(r *restful.Request, w *restful.Response) {
 	}
 
 	// Let them know the location of the newly created resource.
-	// TODO: Use a safe Url path append function.
-	w.AddHeader("Location", u.Path+"/"+k.Encode())
+	w.AddHeader("Location", path.join(u.Path, k.Encode()))
 
 	// Return the resultant entity.
 	w.WriteHeader(http.StatusCreated)
